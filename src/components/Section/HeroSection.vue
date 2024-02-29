@@ -5,7 +5,7 @@ await new Promise(res => setTimeout(res, 2000))
 const props = defineProps({
     bgImage: {
         type: String,
-        default: "./public/img/hero-photo.jpg"
+        default: "@/assets/img/hero-photo.jpg"
     }
 })
 </script>

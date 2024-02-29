@@ -44,7 +44,7 @@ const AsyncRecommendedUILists = defineAsyncComponent({
 
         <Suspense>
           <template #default>
-            <AsyncHeroSection bgImage="./public/img/hero-photo.jpg" />
+            <AsyncHeroSection bgImage="./src/assets/img/hero-photo.jpg" />
           </template>
 
           <template #fallback>
