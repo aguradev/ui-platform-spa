@@ -41,7 +41,7 @@ const props = defineProps({
 
         <div class="hero-content">
             <p class="section-text">Featured</p>
-            <h1 class="title">Breaking Into Product Design : Advice from untitled Founder, Nadya</h1>
+            <h1 class="title">Breaking Into Product Design : Advice from untitled Founder, Keanu</h1>
             <p class="subtitle">Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit, rem officiis aliquam
                 obcaecati odio voluptate dolores eligendi laboriosam, incidunt asperiores a eius sed deserunt blanditiis
                 illo
