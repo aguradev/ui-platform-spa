@@ -24,7 +24,7 @@ app.use(PrimeVue, {
         class: ["relative overflow-hidden"],
       },
       image: {
-        class: ["rounded-md"],
+        class: ["rounded-2xl"],
       },
     },
   },

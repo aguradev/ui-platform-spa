@@ -10,7 +10,7 @@ const props = defineProps({
 
 <style scoped>
 .hero {
-    @apply bg-bottom min-h-[850px] lg:m-9 lg:mt-0 p-8 lg:rounded-xl overflow-hidden relative grid items-end before:content-[''] before:absolute before:inset-0 before:bg-gradient-to-b before:from-transparent before:to-black before:z-[5] before:opacity-75;
+    @apply bg-bottom min-h-[850px] lg:m-9 lg:mt-0 p-8 lg:rounded-2xl overflow-hidden relative grid items-end before:content-[''] before:absolute before:inset-0 before:bg-gradient-to-b before:from-transparent before:to-black before:z-[5] before:opacity-75;
 
     .video-bg {
         @apply absolute top-0 left-0 min-h-full min-w-full object-cover
