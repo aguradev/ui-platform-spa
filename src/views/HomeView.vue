@@ -25,6 +25,9 @@ async function LoadMoreRecommendedData(limit) {
 }
 
 const updatePreloadRecommendedSection = computed({
+  get() {
+    return preloadRecommendedSection.value
+  },
   set(newValue) {
     preloadRecommendedSection.value = newValue
   }
@@ -87,8 +90,7 @@ const AsyncRecommendedUILists = defineAsyncComponent({
                 <div>
                   <AsyncRecommendedUILists />
 
-                  <div :class="`w-full text-center`"
-                    v-bind:hidden="recommendedUIData.length === getLimitRecommendedUI.length">
+                  <div :class="`w-full text-center`" v-if="recommendedUIData.length !== getLimitRecommendedUI.length">
                     <Button label="Load more" class="px-6 py-3 text-white bg-black rounded-md"
                       @click="LoadMoreRecommendedData(4)" />
                   </div>
