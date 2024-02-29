@@ -9,7 +9,7 @@ const router = createRouter({
       path: "/",
       name: "home",
       meta: {
-        title: "Uikitku",
+        title: "UI Platform app - Uikitku",
       },
       component: homePage,
     },

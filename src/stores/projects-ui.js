@@ -15,6 +15,7 @@ export const recommendedUIDataStore = defineStore(
     const incrementDataRecommended = (value) => (limitData.value += value);
 
     return {
+      limitData,
       recommendedUIData,
       getLimitRecommendedUI,
       incrementDataRecommended,

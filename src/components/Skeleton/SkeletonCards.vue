@@ -6,7 +6,7 @@ import Skeleton from 'primevue/skeleton';
 </script>
 
 <template>
-    <CardElement v-for="(index) in 4" :key="index">
+    <CardElement>
         <template #card__header>
             <CardHeader>
                 <template #header__content>

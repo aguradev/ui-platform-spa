@@ -1,5 +1,5 @@
 <script setup>
-import { defineAsyncComponent, ref } from 'vue';
+import { computed, defineAsyncComponent, ref } from 'vue';
 import SkeletonHeroSection from '@/components/Skeleton/SkeletonHeroSection.vue';
 import SkeletonCards from '@/components/Skeleton/SkeletonCards.vue';
 import SectionContent from '@/components/Section/SectionContent.vue';
@@ -10,18 +10,24 @@ import Button from 'primevue/button';
 import PhotoImage from '@/assets/img/hero-photo.jpg'
 
 const UIDataStore = recommendedUIDataStore()
-const { recommendedUIData, getLimitRecommendedUI } = storeToRefs(UIDataStore)
+const { limitData, recommendedUIData, getLimitRecommendedUI } = storeToRefs(UIDataStore)
 const preloadRecommendedSection = ref(false)
 
 async function LoadMoreRecommendedData(limit) {
   await new Promise((res) => {
-    preloadRecommendedSection.value = true
+    updatePreloadRecommendedSection.value = true
     setTimeout(() => {
-      preloadRecommendedSection.value = false
+      updatePreloadRecommendedSection.value = false
       res(UIDataStore.incrementDataRecommended(limit))
     }, 100)
   })
 }
+
+const updatePreloadRecommendedSection = computed({
+  set(newValue) {
+    preloadRecommendedSection.value = newValue
+  }
+})
 
 const AsyncHeroSection = defineAsyncComponent({
   loader: () => import('@/components/Section/HeroSection.vue'),
@@ -63,7 +69,7 @@ const AsyncRecommendedUILists = defineAsyncComponent({
                 </template>
 
                 <template #fallback>
-                  <SkeletonCards />
+                  <SkeletonCards v-for="(item, index) in 4" :key="index" />
                 </template>
               </Suspense>
 
@@ -73,28 +79,28 @@ const AsyncRecommendedUILists = defineAsyncComponent({
 
         <SectionContent title-content="Recommendation">
           <template #content>
-            <div>
-              <Suspense v-if="!preloadRecommendedSection">
 
-                <template #default>
-                  <div>
-                    <AsyncRecommendedUILists />
+            <Suspense v-if="!preloadRecommendedSection">
 
-                    <div :class="`w-full text-center`"
-                      v-bind:hidden="recommendedUIData.length === getLimitRecommendedUI.length">
-                      <Button label="Load more" class="px-6 py-3 text-white bg-black rounded-md"
-                        @click="LoadMoreRecommendedData(4)" />
-                    </div>
+              <template #default>
+                <div>
+                  <AsyncRecommendedUILists />
+
+                  <div :class="`w-full text-center`"
+                    v-bind:hidden="recommendedUIData.length === getLimitRecommendedUI.length">
+                    <Button label="Load more" class="px-6 py-3 text-white bg-black rounded-md"
+                      @click="LoadMoreRecommendedData(4)" />
                   </div>
-                </template>
+                </div>
+              </template>
 
-                <template #fallback>
-                  <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
-                    <SkeletonCards />
-                  </div>
-                </template>
-              </Suspense>
-            </div>
+              <template #fallback>
+                <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+                  <SkeletonCards v-for="(index) in limitData" :key="index" />
+                </div>
+              </template>
+            </Suspense>
+
           </template>
 
         </SectionContent>
