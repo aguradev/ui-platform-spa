@@ -1,0 +1,9 @@
+@import url("./font.css");
+
+html {
+  font-family: "Mona Sans";
+}
+
+body {
+  background-color: #fefefe;
+}
