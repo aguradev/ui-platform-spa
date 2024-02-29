@@ -7,6 +7,7 @@ import MainLayout from '@/layouts/MainLayout.vue';
 import { recommendedUIDataStore } from '@/stores/projects-ui';
 import { storeToRefs } from 'pinia';
 import Button from 'primevue/button';
+import PhotoImage from '@/assets/img/hero-photo.jpg'
 
 const UIDataStore = recommendedUIDataStore()
 const { recommendedUIData, getLimitRecommendedUI } = storeToRefs(UIDataStore)
@@ -44,7 +45,7 @@ const AsyncRecommendedUILists = defineAsyncComponent({
 
         <Suspense>
           <template #default>
-            <AsyncHeroSection bgImage="src/assets/img/hero-photo.jpg" />
+            <AsyncHeroSection :bg-image="PhotoImage" />
           </template>
 
           <template #fallback>
