@@ -2,6 +2,28 @@
 import Button from "primevue/button";
 </script>
 
+<style scoped>
+.footer {
+    @apply bg-[#222] text-white py-24 px-8 m-0 lg:m-8 lg:rounded-2xl;
+
+    .footer__header {
+        @apply text-center;
+
+        .title {
+            @apply mb-8 text-4xl font-bold;
+        }
+
+        .subtitle {
+            @apply text-xl;
+        }
+    }
+
+    .footer__cta {
+        @apply flex justify-center w-full gap-x-8 mt-14;
+    }
+}
+</style>
+
 <template>
     <footer class="footer">
         <header class="footer__header">
