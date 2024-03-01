@@ -36,9 +36,9 @@ const AsyncHeroImageSection = defineAsyncComponent({
   loader: () => import('@/components/Section/HeroSection.vue')
 })
 
-const AsyncHeroSectionBgVideo = defineAsyncComponent({
-  loader: () => import('@/components/Section/HeroSectionBgVideo.vue'),
-})
+// const AsyncHeroSectionBgVideo = defineAsyncComponent({
+//   loader: () => import('@/components/Section/HeroSectionBgVideo.vue'),
+// })
 
 const AsyncTopCategoriesSection = defineAsyncComponent({
   loader: () => import('@/components/Section/TopCategories.vue'),
