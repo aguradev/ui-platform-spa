@@ -8,7 +8,6 @@ import { recommendedUIDataStore } from '@/stores/projects-ui';
 import { storeToRefs } from 'pinia';
 import Button from 'primevue/button';
 import PhotoImage from '@/assets/img/hero-photo.jpg'
-import HomeVideo from '@/assets/video/home.mp4'
 
 const UIDataStore = recommendedUIDataStore()
 const { limitData, recommendedUIData, getLimitRecommendedUI } = storeToRefs(UIDataStore)
@@ -33,6 +32,10 @@ const updatePreloadRecommendedSection = computed({
   }
 })
 
+const AsyncHeroImageSection = defineAsyncComponent({
+  loader: () => import('@/components/Section/HeroSection.vue')
+})
+
 const AsyncHeroSectionBgVideo = defineAsyncComponent({
   loader: () => import('@/components/Section/HeroSectionBgVideo.vue'),
 })
@@ -55,7 +58,7 @@ const AsyncRecommendedUILists = defineAsyncComponent({
 
         <Suspense>
           <template #default>
-            <AsyncHeroSectionBgVideo :videoURL="HomeVideo" :thumbnailURL="PhotoImage" />
+            <AsyncHeroImageSection :bg-image="PhotoImage" />
           </template>
 
           <template #fallback>
