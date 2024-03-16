@@ -47,6 +47,32 @@ const galleryMasonry = reactive([
         ],
         centerPosition: true
     },
+    {
+        sources: [
+            {
+                src: "https://cdn.dribbble.com/userupload/8926923/file/original-dbd7448d4f0cdd00b4987a6ad1e63fe4.mp4",
+                type: "video"
+            },
+            {
+                src: "https://i.pinimg.com/564x/83/de/b6/83deb6f1b64bd5342f526e2f5f552608.jpg",
+                type: "img"
+            }
+        ],
+        centerPosition: false
+    },
+    {
+        sources: [
+            {
+                src: "https://cdn.dribbble.com/userupload/10150406/file/original-42b0236086885b724bfc66d9296455a4.mp4",
+                type: "video"
+            },
+            {
+                src: "https://cdn.dribbble.com/users/139218/screenshots/3531072/media/5c3dc630ca3c3895cc2dedc71b40925d.gif",
+                type: "img"
+            }
+        ],
+        centerPosition: true
+    },
 ])
 </script>
 
@@ -81,7 +107,7 @@ section {
                     </p>
                 </section>
 
-                <CardMasonry />
+                <CardMasonry :MasonryContent="galleryMasonry" />
             </main>
 
         </template>

@@ -1,5 +1,5 @@
 <script setup>
-import { computed, defineAsyncComponent, ref } from 'vue';
+import { computed, onUnmounted, defineAsyncComponent, ref } from 'vue';
 import SkeletonCards from '@/components/Skeleton/SkeletonCards.vue';
 import SectionContent from '@/components/Section/SectionContent.vue';
 import MainLayout from '@/layouts/MainLayout.vue';
@@ -14,6 +14,11 @@ const UIDataStore = recommendedUIDataStore()
 const { incrementDataRecommended } = UIDataStore
 const { limitData, recommendedUIData } = storeToRefs(UIDataStore)
 const preloadRecommendedSection = ref(false)
+
+onUnmounted(() => {
+  //? reset limit data when goto another page
+  limitData.value = 4
+})
 
 async function LoadMoreRecommendedData(limit) {
   await new Promise((res) => {

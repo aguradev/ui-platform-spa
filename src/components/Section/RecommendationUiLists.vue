@@ -1,5 +1,5 @@
 <script setup>
-import Image from 'primevue/image';
+import { onMounted } from 'vue';
 import CardElement from '@/elements/Card/CardElement.vue';
 import CardHeader from '@/elements/Card/CardHeader.vue';
 import CardContent from '@/elements/Card/CardContent.vue';
@@ -9,13 +9,15 @@ import { storeToRefs } from 'pinia';
 // ? loading component FOR ASYNC CALL
 
 const useStateRecommendedUI = recommendedUIDataStore()
+const { fetchingRecommendedData } = useStateRecommendedUI
 const { limitDataRecommended } = storeToRefs(useStateRecommendedUI)
 
-await new Promise((res) => {
-    setTimeout(async () => {
-        res(await useStateRecommendedUI.fetchingRecommendedData())
-    }, 3000)
-})
+await new Promise((res) => setTimeout(async () => {
+    res(true)
+}, 3000))
+
+onMounted(async () => await fetchingRecommendedData())
+
 </script>
 
 <style scoped>
@@ -31,7 +33,9 @@ await new Promise((res) => {
             <template #card__header>
                 <CardHeader>
                     <template #header__content>
-                        <Image :src="item.imgUrl" />
+                        <div class="overflow-hidden rounded-xl">
+                            <img :src="item.imgUrl" class="object-cover w-full h-full" />
+                        </div>
                     </template>
                 </CardHeader>
             </template>
