@@ -9,10 +9,10 @@ const { MasonryContent } = props
 
 <style scoped>
 .card__masonry {
-    @apply flex items-stretch flex-nowrap gap-6 m-5;
+    @apply flex flex-wrap lg:flex-nowrap gap-6 m-5;
 
     .card__wrapper {
-        @apply flex flex-col gap-4 w-1/4;
+        @apply flex flex-col gap-4 w-full lg:w-1/4;
 
         .card {
             @apply rounded-md overflow-hidden;
