@@ -4,17 +4,17 @@ import CardElement from '@/elements/Card/CardElement.vue';
 import CardHeader from '@/elements/Card/CardHeader.vue';
 import CardContent from '@/elements/Card/CardContent.vue';
 import { recommendedUIDataStore } from '@/stores/projects-ui';
-import { onMounted, ref } from 'vue';
 import { storeToRefs } from 'pinia';
 
 // ? loading component FOR ASYNC CALL
-await new Promise(res => setTimeout(res, 2000))
 
-const { getLimitRecommendedUI } = storeToRefs(recommendedUIDataStore())
-const recommendedUIData = ref([])
+const useStateRecommendedUI = recommendedUIDataStore()
+const { limitDataRecommended } = storeToRefs(useStateRecommendedUI)
 
-onMounted(() => {
-    recommendedUIData.value = [...getLimitRecommendedUI.value] || []
+await new Promise((res) => {
+    setTimeout(async () => {
+        res(await useStateRecommendedUI.fetchingRecommendedData())
+    }, 3000)
 })
 </script>
 
@@ -27,7 +27,7 @@ onMounted(() => {
 <template>
     <div class="grid gap-6 mb-6 md:grid-cols-2 lg:grid-cols-4">
 
-        <CardElement v-for="(item, index) in recommendedUIData" :key="index">
+        <CardElement v-for="(item, index) in limitDataRecommended" :key="index">
             <template #card__header>
                 <CardHeader>
                     <template #header__content>
