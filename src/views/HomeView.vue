@@ -6,8 +6,7 @@ import MainLayout from '@/layouts/MainLayout.vue';
 import { recommendedUIDataStore } from '@/stores/projects-ui';
 import { storeToRefs } from 'pinia';
 import Button from 'primevue/button';
-import PhotoImage from '@/assets/img/hero-photo.jpg'
-import HeroSection from '@/components/Section/HeroSection.vue';
+import HeroSection from '@/components/Section/HeroSectionText.vue';
 import TopCategoriesVue from '@/components/Section/TopCategories.vue';
 
 const UIDataStore = recommendedUIDataStore()
@@ -49,9 +48,9 @@ const AsyncRecommendedUILists = defineAsyncComponent({
 <template>
   <MainLayout>
     <template #content>
-      <div>
-
-        <HeroSection :bgImage="PhotoImage" />
+      <HeroSection :title="`Unlock the Power 🚀 of Intuitive Design with UIKitku `"
+        slogan="Unleash Your Creative Potential and Bring Your Designs to Life. Where Every Detail Matters, and Every Interaction Counts." />
+      <div class="max-w-[1600px] mx-auto">
 
         <SectionContent titleContent="Our Service Kits">
 

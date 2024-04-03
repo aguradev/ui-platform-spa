@@ -28,10 +28,10 @@ const { MasonryContent } = props
 
 <template>
     <div class="card__masonry">
-        <div v-for="(item, i) in MasonryContent" :key="i" class="card__wrapper" :class="{
+        <div v-for="(item, i) in  MasonryContent " :key="i" :class="{
             'self-center': item.centerPosition
-        }">
-            <div class="card" v-for="(source, j) in item.sources" :key="j">
+        }" class="card__wrapper">
+            <div class="card" v-for="( source, j ) in  item.sources " :key="j">
                 <div v-if="source.type == 'img'">
                     <img :src="source.src" />
                 </div>

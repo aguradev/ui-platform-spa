@@ -82,10 +82,10 @@ section {
 }
 
 .about__heading {
-    @apply flex gap-x-8 flex-col md:flex-row items-center md:px-44;
+    @apply flex gap-x-8 flex-col py-0 items-center md:max-w-[1600px] mx-auto md:py-12 md:flex-row;
 
     .heading-1 {
-        @apply md:text-4xl lg:text-7xl font-semibold max-w-4xl lg:leading-snug;
+        @apply text-4xl max-w-[85%] mb-6 leading-normal font-semibold lg:mb-0 lg:text-7xl lg:max-w-4xl lg:leading-snug;
     }
 
     .sub-1 {
@@ -98,7 +98,7 @@ section {
     <MainLayout>
         <template #content>
 
-            <main class="py-12">
+            <div>
                 <section class="about__heading">
                     <h1 class="heading-1">Design the Future. Showcase Your Creative Brilliance with
                         UIKitku</h1>
@@ -108,7 +108,7 @@ section {
                 </section>
 
                 <CardMasonry :MasonryContent="galleryMasonry" />
-            </main>
+            </div>
 
         </template>
     </MainLayout>
