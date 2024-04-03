@@ -25,10 +25,19 @@ const navMenu = reactive([
 
 </script>
 
+<style scoped>
+main.content {
+    @apply pt-36 md:pt-0;
+}
+</style>
+
 
 <template>
     <InlineNavbar :navItemMenu="navMenu" />
-    <slot name="content" />
+
+    <main class="content">
+        <slot name="content" />
+    </main>
 
     <FooterSection />
 </template>

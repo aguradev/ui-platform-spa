@@ -1,21 +1,23 @@
 <script setup>
-import Image from 'primevue/image';
+import { onMounted } from 'vue';
 import CardElement from '@/elements/Card/CardElement.vue';
 import CardHeader from '@/elements/Card/CardHeader.vue';
 import CardContent from '@/elements/Card/CardContent.vue';
 import { recommendedUIDataStore } from '@/stores/projects-ui';
-import { onMounted, ref } from 'vue';
 import { storeToRefs } from 'pinia';
 
 // ? loading component FOR ASYNC CALL
-await new Promise(res => setTimeout(res, 2000))
 
-const { getLimitRecommendedUI } = storeToRefs(recommendedUIDataStore())
-const recommendedUIData = ref([])
+const useStateRecommendedUI = recommendedUIDataStore()
+const { fetchingRecommendedData } = useStateRecommendedUI
+const { limitDataRecommended } = storeToRefs(useStateRecommendedUI)
 
-onMounted(() => {
-    recommendedUIData.value = [...getLimitRecommendedUI.value] || []
-})
+await new Promise((res) => setTimeout(async () => {
+    res(true)
+}, 3000))
+
+onMounted(async () => await fetchingRecommendedData())
+
 </script>
 
 <style scoped>
@@ -27,11 +29,13 @@ onMounted(() => {
 <template>
     <div class="grid gap-6 mb-6 md:grid-cols-2 lg:grid-cols-4">
 
-        <CardElement v-for="(item, index) in recommendedUIData" :key="index">
+        <CardElement v-for="(item, index) in limitDataRecommended" :key="index">
             <template #card__header>
                 <CardHeader>
                     <template #header__content>
-                        <Image :src="item.imgUrl" />
+                        <div class="overflow-hidden rounded-xl">
+                            <img :src="item.imgUrl" class="object-cover w-full h-full" />
+                        </div>
                     </template>
                 </CardHeader>
             </template>

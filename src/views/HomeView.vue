@@ -1,24 +1,30 @@
 <script setup>
-import { computed, defineAsyncComponent, ref } from 'vue';
-import SkeletonHeroSection from '@/components/Skeleton/SkeletonHeroSection.vue';
+import { computed, onUnmounted, defineAsyncComponent, ref } from 'vue';
 import SkeletonCards from '@/components/Skeleton/SkeletonCards.vue';
 import SectionContent from '@/components/Section/SectionContent.vue';
 import MainLayout from '@/layouts/MainLayout.vue';
 import { recommendedUIDataStore } from '@/stores/projects-ui';
 import { storeToRefs } from 'pinia';
 import Button from 'primevue/button';
-import PhotoImage from '@/assets/img/hero-photo.jpg'
+import HeroSection from '@/components/Section/HeroSectionText.vue';
+import TopCategoriesVue from '@/components/Section/TopCategories.vue';
 
 const UIDataStore = recommendedUIDataStore()
-const { limitData, recommendedUIData, getLimitRecommendedUI } = storeToRefs(UIDataStore)
+const { incrementDataRecommended } = UIDataStore
+const { limitData, recommendedUIData } = storeToRefs(UIDataStore)
 const preloadRecommendedSection = ref(false)
+
+onUnmounted(() => {
+  //? reset limit data when goto another page
+  limitData.value = 4
+})
 
 async function LoadMoreRecommendedData(limit) {
   await new Promise((res) => {
     updatePreloadRecommendedSection.value = true
     setTimeout(() => {
       updatePreloadRecommendedSection.value = false
-      res(UIDataStore.incrementDataRecommended(limit))
+      res(incrementDataRecommended(limit))
     }, 100)
   })
 }
@@ -32,18 +38,6 @@ const updatePreloadRecommendedSection = computed({
   }
 })
 
-const AsyncHeroImageSection = defineAsyncComponent({
-  loader: () => import('@/components/Section/HeroSection.vue')
-})
-
-// const AsyncHeroSectionBgVideo = defineAsyncComponent({
-//   loader: () => import('@/components/Section/HeroSectionBgVideo.vue'),
-// })
-
-const AsyncTopCategoriesSection = defineAsyncComponent({
-  loader: () => import('@/components/Section/TopCategories.vue'),
-})
-
 const AsyncRecommendedUILists = defineAsyncComponent({
   loader: () => import('@/components/Section/RecommendationUiLists.vue'),
   loadingComponent: SkeletonCards
@@ -54,37 +48,21 @@ const AsyncRecommendedUILists = defineAsyncComponent({
 <template>
   <MainLayout>
     <template #content>
-      <div>
-
-        <Suspense>
-          <template #default>
-            <AsyncHeroImageSection :bg-image="PhotoImage" />
-          </template>
-
-          <template #fallback>
-            <SkeletonHeroSection />
-          </template>
-        </Suspense>
+      <HeroSection :title="`Unlock the Power 🚀 of Intuitive Design with UIKitku `"
+        slogan="Unleash Your Creative Potential and Bring Your Designs to Life. Where Every Detail Matters, and Every Interaction Counts." />
+      <div class="max-w-[1600px] mx-auto">
 
         <SectionContent titleContent="Our Service Kits">
+
           <template #content>
             <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
-
-              <Suspense>
-                <template #default>
-                  <AsyncTopCategoriesSection />
-                </template>
-
-                <template #fallback>
-                  <SkeletonCards v-for="(item, index) in 4" :key="index" />
-                </template>
-              </Suspense>
-
+              <TopCategoriesVue />
             </div>
           </template>
         </SectionContent>
 
         <SectionContent title-content="Recommendation">
+
           <template #content>
 
             <Suspense v-if="!preloadRecommendedSection">
@@ -93,7 +71,7 @@ const AsyncRecommendedUILists = defineAsyncComponent({
                 <div>
                   <AsyncRecommendedUILists />
 
-                  <div :class="`w-full text-center`" v-if="recommendedUIData.length !== getLimitRecommendedUI.length">
+                  <div :class="`w-full text-center`" v-if="limitData <= recommendedUIData.length">
                     <Button label="Load more" class="px-6 py-3 text-white bg-black rounded-md"
                       @click="LoadMoreRecommendedData(4)" />
                   </div>

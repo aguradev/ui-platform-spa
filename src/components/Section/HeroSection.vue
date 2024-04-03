@@ -1,7 +1,4 @@
 <script setup>
-
-await new Promise(res => setTimeout(res, 2000))
-
 const props = defineProps({
     bgImage: {
         type: String,
@@ -12,7 +9,7 @@ const props = defineProps({
 
 <style scoped>
 .hero {
-    @apply bg-bottom min-h-[850px] lg:m-9 lg:mt-0 p-8 lg:rounded-xl overflow-hidden relative grid items-end before:content-[''] before:absolute before:inset-0 before:bg-gradient-to-b before:from-transparent before:to-black before:z-[5] before:opacity-75;
+    @apply bg-bottom min-h-[850px] lg:m-9 lg:mt-0 p-8 lg:rounded-xl overflow-hidden relative grid items-end before:content-[''] before:absolute before:inset-0 before:bg-gradient-to-b before:from-transparent before:to-black before:z-[5] before:opacity-75 bg-no-repeat bg-cover;
 
     .hero-content {
         @apply lg:max-w-[1300px] z-[99];
@@ -37,7 +34,8 @@ const props = defineProps({
         <div class="hero-content">
             <p class="section-text">Featured</p>
             <h1 class="title">Breaking Into Product Design : Advice from untitled Founder, Ken</h1>
-            <p class="subtitle">Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit, rem officiis aliquam
+            <p class="subtitle">Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit, rem officiis
+                aliquam
                 obcaecati odio voluptate dolores eligendi laboriosam, incidunt asperiores a eius sed deserunt blanditiis
                 illo
                 fuga?

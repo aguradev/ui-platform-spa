@@ -18,7 +18,7 @@ const props = defineProps({
 }
 
 .navbar {
-    @apply absolute z-[99] w-full text-white lg:relative lg:text-gray-900 flex px-9 py-9 items-center justify-between
+    @apply text-white bg-gray-900 fixed top-0 z-[999] w-full md:relative md:bg-transparent md:text-gray-900 max-w-[1440px] flex items-center justify-around mx-auto py-9 px-9;
 }
 
 .navbar .wrapper {
